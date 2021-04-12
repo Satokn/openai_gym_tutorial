@@ -22,9 +22,9 @@ def callback(_locals, _globals):
             update_model = mean_reward > best_mean_reward
             if update_model:
                 best_mean_reward = mean_reward
-                _locals["self"].save("breakout_model")
+                model.save('breakout_model')
 
-            print(f"time: {datetime.datetime.now(pytz.timezone("Asia/Tokyo"))}, num_update: {num_update}, mean: {mean_reward}, best_mean: {best_mean_reward}, model_update: {update_model}")
+            print(f"time: {datetime.datetime.now()}, num_update: {num_update}, mean: {mean_reward}, best_mean: {best_mean_reward}, model_update: {update_model}")
 
     num_update += 1
     return True
