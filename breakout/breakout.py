@@ -30,10 +30,10 @@ def make_env(env_id, rank, seed=0):
 
 def main():
     train_env = DummyVecEnv([make_env(ENV_ID, i) for i in range(NUM_ENV)])
-    model = PPO2("CnnPolicy", train_env, verbose=0)
-    model = PPO2.load("./logs/best_model.zip", env=train_env, verbose=0)
+    model = PPO2("CnnPolicy", train_env, verbose=0, cliprange=0.1)
+    #model = PPO2.load("./logs/best_model.zip", env=train_env, verbose=0)
     callback = SaveOnBestTrainingRewardCallback(check_freq=10, log_dir=log_dir)
-    #model.learn(total_timesteps=1280000, callback=callback)
+    model.learn(total_timesteps=1280000, callback=callback)
 
     test_env = DummyVecEnv([make_env(ENV_ID, 9)])
 
